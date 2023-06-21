@@ -13,7 +13,7 @@ $category=$sqlState->fetch(PDO::FETCH_ASSOC);
 $sqlState = $pdo->prepare("SELECT * FROM products WHERE category_id=?");
 $sqlState->execute([$id]);
 
-$prodcuts=$sqlState->fetchAll(PDO::FETCH_OBJ);
+$products=$sqlState->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 <!DOCTYPE html>
@@ -74,22 +74,25 @@ $prodcuts=$sqlState->fetchAll(PDO::FETCH_OBJ);
             <div class="alert alert-danger" role="alert">Category not found!</div>
             <?php
 
-        }elseif(empty($prodcuts)){
+        }elseif(empty($products)){
 
             ?>
-            <div class="alert alert-danger" role="alert">There is no Products in this category!</div>
+            <div class="alert alert-danger" role="alert">There is no products in this category!</div>
             <?php
 
         }else{
 
-        foreach($prodcuts as $prodcut){
+        foreach($products as $product){
+            $price=$product->price;
+            $discount=$product->discount;
+            $pprice = $price -(($price*$discount)/100);
         ?>
-            <!--PRODUCT1--> 
+            <!--product1--> 
             <div class="pro">
                 <img src="img/products/f1.jpeg" alt="">
                 <div class="des">
-                    <span><?=  $prodcut->name ?></span>
-                    <h5><?=  $prodcut->name ?></h5>
+                    <span><?= $category->category ?></span>
+                    <h5><?=  $product->name ?></h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -97,7 +100,7 @@ $prodcuts=$sqlState->fetchAll(PDO::FETCH_OBJ);
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4><?=  $prodcut->price ?> $</h4>
+                    <h4><?=  $pprice ?> $</h4>
                 </div>
                 <a href="#"><i class="fa-solid fa-light fa-cart-plus" id="cart"></i></a>
             </div>

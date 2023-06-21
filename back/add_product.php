@@ -21,42 +21,49 @@ $categories = $pdo->query('SELECT * FROM category')->fetchAll(PDO::FETCH_ASSOC);
                 $price = $_POST['price'];
                 $discount = $_POST['discount'];
                 $category = $_POST['category'];
+                $description = $_POST['description'];
                 $date = date('Y-m-d H:i:s');
 
-            }
+                $filename="no_img.png";
 
-
-
-            if (!empty($name) && !empty($price) && !empty($category)) {
-                try {
-                    $sqlState = $pdo->prepare('INSERT INTO products  VALUES (null, ?,?,?,?,?)');
-                    $inserted = $sqlState->execute([$name, $price, $discount, $category, $date]);
-                    header('location: ./Products.php');
-
+                if(!empty($_FILES['img']['name'])){
+                    $img=$_FILES['img']['name'];
+                    $filename = uniqid().$img;
+                    if(move_uploaded_file($_FILES['img']['tmp_name'], './upload/product/' . $filename));
+                    var_dump($img);
                 }
-                catch (PDOException $e) {
-                    ?>
-                    <div class="alert alert-danger" role="alert">
-                        Database error (40023).
-                    </div>
-                    <?php
-                }
+
+                if (!empty($name) && !empty($price) && !empty($category)) {
+                    try {
+                        $sqlState = $pdo->prepare('INSERT INTO products  VALUES (null, ?,?,?,?,?,?,?)');
+                        $inserted = $sqlState->execute([$name, $price, $discount, $description, $filename, $category, $date]);
+                        header('location: ./Products.php');
+    
+                    }
+                    catch (PDOException $e) {
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            Database error (40023).
+                        </div>
+                        <?php
+                    }
+                    
                 
-            
-            ?>
-
-
+                ?>
+    
+    
+                <?php
+                } else {
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        Category, price and name are required !!
+                    </div>
             <?php
-            } else {
-            ?>
-                <div class="alert alert-danger" role="alert">
-                    Category, price and name are required !!
-                </div>
-        <?php
-            }
+                }
 
+            }
         ?>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <label for="">category</label>
         <select name="category" class="form-control my2">
             <option value="" >Click here to chose a category</option>
@@ -79,6 +86,11 @@ $categories = $pdo->query('SELECT * FROM category')->fetchAll(PDO::FETCH_ASSOC);
         <label class="form-label">discount</label>
         <input type="number" class="form-control" value="0" name="discount" min="0" max="90">
 
+        <label class="form-label">description</label>
+        <textarea class="form-control" name="description"></textarea>
+
+        <label class="form-label">img</label>
+        <input type="file" class="form-control" name="img">
 
         <input type="submit" value="Add product" class="btn btn-primary my-2" name="add">
 

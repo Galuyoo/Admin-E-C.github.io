@@ -67,8 +67,8 @@ $categories = $pdo->query("SELECT * FROM category")->fetchAll(PDO::FETCH_OBJ);
             
             $sqlState = $pdo->prepare("SELECT * FROM products WHERE category_id=?");
             $sqlState->execute([$id]);
-            
             $products=$sqlState->fetchAll(PDO::FETCH_OBJ);
+
             ?>
 
             <?php
@@ -78,14 +78,18 @@ $categories = $pdo->query("SELECT * FROM category")->fetchAll(PDO::FETCH_OBJ);
             //echo"<h3> There are no Products in the category </strong>{$categoryy}</strong> for the moment!!</h3>";
             }else{
             //echo "<h3>Products of the category {$categoryy}:<h3>";
-            foreach($products as $prodcut){
+            foreach($products as $product){
+                $price=$product->price;
+                $discount=$product->discount;
+    
+                $pprice = $price -(($price*$discount)/100);
             ?>
                 <!--PRODUCT1--> 
                 <div class="pro">
-                    <img src="img/products/f1.jpeg" alt="">
+                    <img src="../back/upload/product/<?=$product->img?>" alt="">
                     <div class="des">
-                        <span><?=  $prodcut->name ?></span>
-                        <h5><?=  $prodcut->name ?></h5>
+                        <span><?=  $categoryy ?></span>
+                        <h5><?=  $product->name ?></h5>
                         <div class="star">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -93,7 +97,7 @@ $categories = $pdo->query("SELECT * FROM category")->fetchAll(PDO::FETCH_OBJ);
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <h4><?=  $prodcut->price ?> $</h4>
+                        <h4><?=  $pprice ?> $</h4>
                     </div>
                     <a href="#"><i class="fa-solid fa-light fa-cart-plus" id="cart"></i></a>
                 </div>
