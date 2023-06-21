@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <script
-        src="https://kit.fontawesome.com/64d58efce2.js"
-        crossorigin="anonymous"
-        ></script>
+<?php include './html/head.php' ?>
 
-        <link rel="stylesheet" href="./css/style.css" />
-        <title>Adding cat Page</title>
-    </head>
     <body>
 
 <?php include './html/header.php' ?>
@@ -21,7 +11,7 @@
     if(isset($_POST['add'])){
         $category = $_POST['category'];
         $description = $_POST['description'];  // Here
-        $rating = $_POST['rating'];
+        $img = $_POST['img'];
 
         if(!empty($category) && !empty($description)){  // And here
             require_once './php/pdo.php';
@@ -39,8 +29,8 @@
                 <?php
             } else {
                 // If no records are found, proceed with insertion
-                $sqlState = $pdo->prepare('INSERT INTO category(category,description,rating) VALUES(?,?,?)');
-                $sqlState->execute([$category,$description,$rating]);  // And here
+                $sqlState = $pdo->prepare('INSERT INTO category(category,description,img) VALUES(?,?,?)');
+                $sqlState->execute([$category,$description,$img]);  // And here
                 header('location: ./Categories.php');
             }
 
@@ -60,8 +50,8 @@
         <label class="form-label">description</label>
         <textarea class="form-control" name="description"></textarea>
 
-        <label class="form-label">rating</label>
-        <input type="text" class="form-control" name="rating">
+        <label class="form-label">img</label>
+        <input type="text" class="form-control" name="img">
 
         <input type="submit" value="Add category" class="btn btn-primary my-2" name="add">
     </form>

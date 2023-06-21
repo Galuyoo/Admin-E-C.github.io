@@ -2,14 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://kit.fontawesome.com/791c42954a.js" crossorigin="anonymous"></script>   
-        <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/style.css" />
-        <title>Organic'D home page</title>
-    </head>
+<?php include './html/head.php' ?>
+
     <body>
 
     <?php include './html/header.php' ?>

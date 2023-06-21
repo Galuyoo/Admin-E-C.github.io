@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <script
-        src="https://kit.fontawesome.com/64d58efce2.js"
-        crossorigin="anonymous"
-        ></script>
+<?php include './html/head.php' ?>
 
-        <link rel="stylesheet" href="./css/style.css" />
-        <title>Modify category Page</title>
-    </head>
     <body>
 
-<?php include './html/header.php' ?>
+    <?php include './html/header.php' ?>
 <div class="container py-2">
     <h4>Modify category</h4>
+
+
     <?php
     require_once '../php/pdo.php';
     $sqlState = $pdo->prepare('SELECT * FROM category WHERE id=?');
@@ -28,14 +20,15 @@
     if(isset($_POST['Modify'])){
         $category = $_POST['category'];
         $description = $_POST['description'];  // Here
-
+        $img = $_POST['img'];
         if(!empty($category) && !empty($description)){  // And here
         
             // If no records are found, proceed with insertion
             $sqlState = $pdo->prepare('UPDATE category SET category=?,
-                                                            description=?
+                                                            description=?,
+                                                            img=?
                                                         WHERE id=?');
-            $sqlState->execute([$category,$description,$id]);  // And here
+            $sqlState->execute([$category,$description,$img,$id]);  // And here
             header('location: ../Categories.php');
             
         }else{
@@ -56,6 +49,9 @@
 
         <label class="form-label">description</label>
         <textarea class="form-control" name="description"><?php echo $categories['description'];?></textarea>
+
+        <label class="form-label">img</label>
+        <input type="text" class="form-control" name="img" value="<?php echo $categories['img'];?>">
 
         <input type="submit" value="Modify category" class="btn btn-primary my-2" name="Modify">
     </form>

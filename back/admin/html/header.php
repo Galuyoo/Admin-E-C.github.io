@@ -10,28 +10,26 @@ else{
 ?>
 
 <section id="header">
-            <a href="#"><img src="./img/logo.png" alt="" class="logo"></a>
             <div>
-                <ul id="navbar">
-                    <li><a  href="Home.php">Home</a></li>
+                <ul id="navbar" style="padding-top: 10px;">
+                    <li><a  href="Home.php"><i class="fa-solid fa-house"></i> Home</a></li>
                 <?php
                         if($connecte){
                             ?>
-                    <li><a href="../admin.php">Admin</a></li>
-                    <li><a href="../add_category.php">Add category</a></li>
-                    <li><a href="../add_product.php">Add product</a></li>
-                    <li><a href="../Categories.php">List of Categories</a></li>
-                    <li><a href="../Products.php">List of Products</a></li>
-                    <li class="lg-bag"><a href="Cart.html" ><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="../admin.php"><i class="fa-solid fa-user-tie"></i> Admin</a></li>
+                    <li><a href="../add_category.php"><i class="fa-solid fa-list-check"></i> Add category</a></li>
+                    <li><a href="../add_product.php"><i class="fa-solid fa-list-check"></i> Add product</a></li>
+                    <li><a href="../Categories.php"><i class="fa-sharp fa-regular fa-rectangle-list"></i> List of Categories</a></li>
+                    <li><a href="../Products.php"><i class="fa-sharp fa-regular fa-rectangle-list"></i> List of Products</a></li>
                     <?php
                         }else{
                             ?>
-                            <li><a href="index.php">Sign in</a></li>
+                            <li><a href="index.php"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
 
                         <?php 
                         }
                         ?>
-                    <li><a href="./php/logout.php">Logout</a></li>
+                    <li><a href="./php/logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
 
                     <a id="close"><i class="fa-solid fa-xmark"></i></a>
                 </ul>

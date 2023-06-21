@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Spartan', sans-serif;
 }
 
 h1 {
@@ -225,6 +224,8 @@ body {
     padding-top: 20px;
     flex-wrap: wrap;
 }
+
+
 
 #product1 .pro {
     width: 23%;

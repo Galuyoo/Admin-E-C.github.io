@@ -221,7 +221,7 @@ body {
 
 #product1 .pro-con {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-top: 20px;
     flex-wrap: wrap;
 }
@@ -857,3 +857,57 @@ footer .copyright{
     }
 
 }
+
+/* Shop page */
+
+#page_header {
+    background-image: url("../img/banner/idk.png");
+    width: 100%;
+    height: 28vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 40px;
+}
+
+#page_header h2,
+#page_header p {
+    color: #fff;
+}
+
+#pagination {
+    text-align: center;
+}
+
+#pagination a{
+    text-decoration: none;
+    background-color: #008178;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#pagination a i{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#dpd {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 50px;
+}
+
+/* Single product */
+
+/* Blog  page */
+
+/* About page */
+
+/* Contact  page  */
+
+/* Cart  page  */

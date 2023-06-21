@@ -1,21 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script
-    src="https://kit.fontawesome.com/64d58efce2.js"
-    crossorigin="anonymous"
-    ></script>
+<?php include './html/head.php' ?>
 
-    <link rel="stylesheet" href="./css/style.css" />
-    <title>Categories</title>
-</head>
 <body>
 <?php include './html/header.php';?>
 <div class="container">
-        <h2>Liste des catégories</h2>
+        <h2>List of Categories</h2>
         <a href="add_category.php" class="btn btn-primary">Add category</a>
     <table class="table table-striped table-hover">
         <thead>  
@@ -23,7 +13,7 @@
                 <th>#id</th>
                 <th>Category_name</th>
                 <th>Description</th>
-                <th>rating</th>
+                <th>img</th>
                 <th>Creation_date</th>
                 <th>Modify & Delete</th>
             </tr>
@@ -40,7 +30,7 @@
                 <td><?php echo $category['id'] ?></td>
                 <td><?php echo $category['category'] ?></td>
                 <td><?php echo $category['description'] ?></td>
-                <td><?php echo $category['rating'] ?></td>
+                <td><?php echo'<i class="';echo $category['img'];echo'"></i>'; ?></td>
                 <td><?php echo $category['real_time'] ?></td>
                 <td>
                     <a href="./admin/modify_category.php?id=<?php echo $category['id']; ?>" class="btn btn-primary">Modify</a>
