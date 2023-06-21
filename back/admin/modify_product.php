@@ -15,28 +15,52 @@ include './html/header.php';
     <h4>modify Products</h4>
         <?php 
             $sqlState = $pdo->prepare('SELECT * FROM products WHERE id=?');
-            $id=$_GET['id'];
+            $id = $_GET['id'];
             $sqlState->execute([$id]);
 
-            $product = $sqlState->fetch(PDO::FETCH_OBJ);;
+            $product = $sqlState->fetch(PDO::FETCH_OBJ);
 
             if(isset($_POST['Modify'])){
                 $name = $_POST['name'];
                 $price = $_POST['price'];
                 $discount = $_POST['discount'];
                 $category = $_POST['category'];
+                $description = $_POST['description'];
+                $date = date('Y-m-d H:i:s');
 
+                $filename='';
+                if(!empty($_FILES['img']['name'])){
+                    $img=$_FILES['img']['name'];
+                    $filename = uniqid().$img;
+                    if(move_uploaded_file($_FILES['img']['tmp_name'], '../upload/product/' . $filename))
+                    var_dump($img);
+                }
                 
                 if(!empty($name) && !empty($price) && !empty($category)){  // And here
-                
-                    // If no records are found, proceed with insertion
-                    $sqlState = $pdo->prepare('UPDATE products SET name=?,
-                                                                    price=?,
-                                                                    discount=?,
-                                                                    category_id=?
-                                                                WHERE id=?');
-                    $updated = $sqlState->execute([$name,$price,$discount,$category,$id]);  // And here
-                    var_dump($sqlState->errorInfo());
+
+                    if(!empty($filename)){
+                        $query = "UPDATE products SET name=?,
+                                                    price=?,
+                                                    discount=?,
+                                                    category_id=?,
+                                                    description=?,
+                                                    img=?
+                                                WHERE id=?";
+                        // If no records are found, proceed with insertion
+                        $sqlState = $pdo->prepare($query);
+                        $updated = $sqlState->execute([$name,$price,$discount,$category,$description,$filename,$id]);  // And here
+                    }else{
+                        $query = "UPDATE products SET name=?,
+                                                    price=?,
+                                                    discount=?,
+                                                    category_id=?,
+                                                    description=?,
+                                                WHERE id=?";
+                        // If no records are found, proceed with insertion
+                        $sqlState = $pdo->prepare($query);
+                        $updated = $sqlState->execute([$name,$price,$discount,$category,$description,$id]);  // And here
+                    }
+
                     if($updated){
                         header('location: ../Products.php');
                     }else{
@@ -56,7 +80,7 @@ include './html/header.php';
             }
 
         ?>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input hidden class="form-control" type="text" name="id" value="<?= $id ?>">
 
         <label class="form-label">name</label>
@@ -69,6 +93,15 @@ include './html/header.php';
 
         <label class="form-label">discount</label>
         <input type="number" class="form-control" value="0" name="discount" min="0" max="90" value="<?= $product->discount ?>">
+
+        <label class="form-label">description</label>
+        <textarea class="form-control" name="description"><?= $product->description ?></textarea>
+
+        <label class="form-label">img</label>
+        <input type="file" class="form-control" name="img">
+        <label class="form-label">The current img-></label>
+        <img height="200vh" src="../upload/product/<?= $product->img ?>"><br>
+
         <?php 
         $categories = $pdo->query('SELECT * FROM category ORDER BY id DESC')->fetchAll(PDO::FETCH_ASSOC);
         ?>
