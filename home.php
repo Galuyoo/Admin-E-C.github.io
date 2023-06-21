@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +11,9 @@
         <title>Organic'D home page</title>
     </head>
     <body>
+
     <?php include './html/header.php' ?>
+
 
         <section id="hero">
             <h4> Buy-and-bennefit</h4>

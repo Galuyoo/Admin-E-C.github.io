@@ -17,11 +17,11 @@ else{
                 <?php
                         if($connecte){
                             ?>
-                    <li><a href="admin.php">Admin</a></li>
-                    <li><a href="add_category.php">Add category</a></li>
-                    <li><a href="add_product.php">Add product</a></li>
-                    <li><a href="Categories.php">List of Categories</a></li>
-                    <li><a href="Products.php">List of Products</a></li>
+                    <li><a href="../admin.php">Admin</a></li>
+                    <li><a href="../add_category.php">Add category</a></li>
+                    <li><a href="../add_product.php">Add product</a></li>
+                    <li><a href="../Categories.php">List of Categories</a></li>
+                    <li><a href="../Products.php">List of Products</a></li>
                     <li class="lg-bag"><a href="Cart.html" ><i class="fa-solid fa-cart-shopping"></i></a></li>
                     <?php
                         }else{

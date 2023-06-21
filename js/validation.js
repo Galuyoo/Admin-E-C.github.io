@@ -15,7 +15,7 @@ validation
         },
         {
             validator: (value) => () => {
-                return fetch("./php/sign/validate_email.php?email=" + encodeURIComponent(value))
+                return fetch("./php/validate_email.php?email=" + encodeURIComponent(value))
                        .then(function(response) {
                            return response.json();
                        })

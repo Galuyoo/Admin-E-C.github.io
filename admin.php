@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script
-        src="https://kit.fontawesome.com/64d58efce2.js"
-        crossorigin="anonymous"
-        ></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+    <link rel="stylesheet" href="./css/style.css" />
 
-        <link rel="stylesheet" href="./css/style.css" />
-        <title>Admine Page</title>
-    </head>
-    <body>
+</head>
+<body>
+<?php 
+require_once './php/pdo.php';
 
-    <?php include './html/header.php' ?>
+include './html/header.php';
 
-    <?php
+?>
+<?php
+
 
 if (isset($_SESSION["user_id"])) {
     
@@ -28,13 +28,34 @@ if (isset($_SESSION["user_id"])) {
     
     $user = $result->fetch_assoc();
 }
+
 ?>
-    
-    <h1>Bonjoour <?= $user["name"] ?></h1>
+
+<h1>Hello <?= $user["name"] ?></h1>
+
+<h1>Welcome to the moderationg website!!</h1>
 
 
+<h3>this page will have statistics for our products and clients... in a form of charts</h3>
 
-    <?php include './html/footer.php' ?>
+<h5>for now it will be impty</h5>
 
-    </body>
+        <pre>
+            <?php
+                $sqlState1 = $pdo->prepare("SELECT * FROM category");
+                $sqlState1->execute();
+                print_r($sqlState1->fetchAll(PDO::FETCH_ASSOC));
+
+                $sqlState2 = $pdo->prepare("SELECT * FROM products");
+                $sqlState2->execute();
+                print_r($sqlState2->fetchAll(PDO::FETCH_ASSOC));
+
+                $sqlState3 = $pdo->prepare("SELECT * FROM user");
+                $sqlState3->execute();
+                print_r($sqlState3->fetchAll(PDO::FETCH_ASSOC));
+            ?>
+        </pre>
+
+<?php include './html/footer.php' ?>
+</body>
 </html>
