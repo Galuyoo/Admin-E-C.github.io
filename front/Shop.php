@@ -90,6 +90,7 @@ $categories = $pdo->query("SELECT * FROM category")->fetchAll(PDO::FETCH_OBJ);
                     <div class="des">
                         <span><?=  $categoryy ?></span>
                         <h5><?=  $product->name ?></h5>
+                        <a href="details.php?id=<?= $product->id ?>" class="btn stretched-link">Click here for more details</a>
                         <div class="star">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>

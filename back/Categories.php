@@ -13,7 +13,7 @@
                 <th>#id</th>
                 <th>Category_name</th>
                 <th>Description</th>
-                <th>img</th>
+                <th>Icon</th>
                 <th>Creation_date</th>
                 <th>Modify & Delete</th>
             </tr>

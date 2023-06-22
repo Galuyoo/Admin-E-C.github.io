@@ -1,3 +1,12 @@
+<section id="News" class="section-p1 section-m1">
+            <div class="newstext">
+                <h4>Sign Up and join the community</h4>
+                <p>Get email updates about our latest shop and <br><span>special offers.</span></p>
+            </div>
+            <div class="form">
+                <input type="text" placeholder="Your email adress"> <button>Sign Up</button>
+            </div>
+        </section>
 <footer class="section-p1">
             <div class="col">
                 <img class="logo" src="./img/logo.png" alt="">

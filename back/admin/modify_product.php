@@ -54,7 +54,7 @@ include './html/header.php';
                                                     price=?,
                                                     discount=?,
                                                     category_id=?,
-                                                    description=?,
+                                                    description=?
                                                 WHERE id=?";
                         // If no records are found, proceed with insertion
                         $sqlState = $pdo->prepare($query);

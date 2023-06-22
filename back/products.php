@@ -15,7 +15,8 @@
                 <th>Price</th>
                 <th>Discount</th>
                 <th>final price</th>
-                <th>Category used</th>
+                <th>Category</th>
+                <th>img</th>
                 <th>Creaction date</th>
                 <th>Modify & Delete</th>
             </tr>
@@ -36,6 +37,7 @@
                 <td><?= $discount ?> %</td>
                 <td><?= $pprice ?> MAD</td>
                 <td><?= $products['category_cat'] ?></td>
+                <td><img width="60" src="./upload/product/<?=$products['img'] ?>" alt="There is no img"></td>
                 <td><?= $products['real_time'] ?></td>
                 <td>
                     <a href="./admin/modify_product.php?id=<?php echo $products['id'] ?>" class="btn btn-primary">Modify</a>

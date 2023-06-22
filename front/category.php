@@ -10,6 +10,8 @@ $sqlState->execute([$id]);
 
 $category=$sqlState->fetch(PDO::FETCH_ASSOC);
 
+$categoryy=$category['category'];
+
 $sqlState = $pdo->prepare("SELECT * FROM products WHERE category_id=?");
 $sqlState->execute([$id]);
 
@@ -89,10 +91,11 @@ $products=$sqlState->fetchAll(PDO::FETCH_OBJ);
         ?>
             <!--product1--> 
             <div class="pro">
-                <img src="img/products/f1.jpeg" alt="">
+            <img src="../back/upload/product/<?=$product->img?>" alt="">
                 <div class="des">
-                    <span><?= $category->category ?></span>
+                    <span><?= $categoryy ?></span>
                     <h5><?=  $product->name ?></h5>
+                    <a href="details.php?id=<?= $product->id ?>" class="btn stretched-link">Click here for more details</a>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
