@@ -26,6 +26,10 @@ h6 {
     font-weight: 700; 
     font-size: 12px;
 }
+h7 {
+    font-weight: 700; 
+    font-size: 10px;
+}
     
 p {
     color:#465b52;
@@ -286,7 +290,6 @@ body {
     background-color: #DFE4DD;
     color: #008178;
     border: 1px solid #cce7d0;
-    position: absolute;
     bottom: 20px;
     right: 15px; 
 }
@@ -651,9 +654,152 @@ footer .copyright{
     text-align: center;
 }
 
+/* Shop page */
+
+#page_header {
+    background-image: url("../img/banner/idk.png");
+    width: 100%;
+    height: 28vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 40px;
+}
+
+#page_header h2,
+#page_header p {
+    color: #fff;
+}
+
+#pagination {
+    text-align: center;
+}
+
+#pagination a{
+    text-decoration: none;
+    background-color: #008178;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#pagination a i{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#dpd {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 50px;
+}
+
+/* Single product */
+
+#prodetails {
+    display: flex;
+    margin-top: 20px;
+}
+
+#prodetails .single-pro-details {
+    width: 50%;
+}
+
+#prodetails .single-pro-details h4{
+    padding: 10px 0 20px 0;
+    font-weight: bold;
+
+}
+#prodetails .single-pro-details .w-100 h4{
+    padding: 0;
+}
+
+#prodetails .single-pro-details h2 {
+    font-size: 26px;
+    font-weight: bold;
+
+}
+
+#prodetails .single-pro-details .inline {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+#prodetails .single-pro-details select {
+    /* Existing styles */
+    display: block;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  
+    /* Additional styles */
+    width: 200px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  #prodetails .single-pro-details select:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  }  
+
+
+
+#prodetails .single-pro-details button{
+    background-color: #008178;
+    color: #fff;
+    padding:8px;
+    display: block;
+}
+
+#prodetails .single-pro-details span {
+    line-height: 25px;
+}
+
+#prodetails .single-pro-image {
+    width: 30%;
+    margin-right: 50px;
+}
+
+.small-img-grp {
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-img-col{
+    padding-top: 4px;
+    flex-basis: 24%;
+    cursor: pointer;
+}
+
+#prodetails .howmany{
+    display:flex; 
+    flex-direction: column;
+}
+
+
+
+
+/* Blog  page */
+
+/* About page */
+
+/* Contact  page  */
+
+/* Cart  page  */
+
+
 /* Start media Query */
 
-@media(max-width:799px){
+@media(max-width:821px){
     .section-p1{
         padding: 40px 40px;
     }
@@ -763,6 +909,35 @@ footer .copyright{
     #News p span{
         color:#008178;
     }
+    
+    #prodetails .single-pro-details .inline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #prodetails .howmany{
+        display:flex; 
+        flex-direction: row;
+    }
+
+    #prodetails .single-pro-details {
+        margin-top: 20px;
+
+        width: 100%;
+    }
+
+    #prodetails .single-pro-details .inline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #prodetails .howmany{
+        display:flex; 
+        flex-direction: row;
+        padding: 10px 0 10px 0;
+    }
 
 }
 
@@ -856,58 +1031,33 @@ footer .copyright{
         width: 100%;
     }
 
+    /* Single product */
+
+    #prodetails {
+        display: flex;
+        flex-direction: column;
+
+    }
+    #prodetails .single-pro-image {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #prodetails .single-pro-details {
+        margin-top: 20px;
+
+        width: 100%;
+    }
+
+    #prodetails .single-pro-details .inline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #prodetails .howmany{
+        display:flex; 
+        flex-direction: row;
+        padding: 10px 0 10px 0;
+    }
 }
-
-/* Shop page */
-
-#page_header {
-    background-image: url("../img/banner/idk.png");
-    width: 100%;
-    height: 28vh;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    padding: 40px;
-}
-
-#page_header h2,
-#page_header p {
-    color: #fff;
-}
-
-#pagination {
-    text-align: center;
-}
-
-#pagination a{
-    text-decoration: none;
-    background-color: #008178;
-    padding: 15px 20px;
-    border-radius: 4px;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-#pagination a i{
-    font-weight: 600;
-    font-size: 16px;
-}
-
-#dpd {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding-top: 50px;
-}
-
-/* Single product */
-
-/* Blog  page */
-
-/* About page */
-
-/* Contact  page  */
-
-/* Cart  page  */

@@ -33,9 +33,9 @@
             <tr>
                 <td><?= $products['id'] ?></td>
                 <td><?= $products['name'] ?></td>
-                <td><?= $price ?> MAD</td>
+                <td>$<?= $price ?> </td>
                 <td><?= $discount ?> %</td>
-                <td><?= $pprice ?> MAD</td>
+                <td>$<?= $pprice ?> </td>
                 <td><?= $products['category_cat'] ?></td>
                 <td><img width="60" src="./upload/product/<?=$products['img'] ?>" alt="There is no img"></td>
                 <td><?= $products['real_time'] ?></td>

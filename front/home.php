@@ -389,7 +389,7 @@
             </div>
         </section>
 
-        <section id="banner3">
+        <section id="banner3" class="">
             <div class="banner-box">
                 <h2>Seasonique Products</h2>
                 <h3>Summer collection <br>-50% OFF</h3>
