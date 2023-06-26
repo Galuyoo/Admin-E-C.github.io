@@ -62,6 +62,9 @@ include './html/header.php';
             }
         ?>
     <form method="post" enctype="multipart/form-data">
+    <?php 
+        $categories = $pdo->query('SELECT * FROM category ORDER BY id DESC')->fetchAll(PDO::FETCH_ASSOC);
+        ?>
         <label for="">category</label>
         <select name="category" class="form-control my2">
             <option value="" >Click here to chose a category</option>

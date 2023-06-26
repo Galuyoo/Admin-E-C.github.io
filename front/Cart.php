@@ -1,96 +1,124 @@
-
 <?php
 session_start();
-require_once './php/pdo.php';
-
-    
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" type="text/css" />        
-        <link rel="stylesheet" href="./css/style.css" />
-        <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="./css/style.css" />
+        <?php include './html/links.php' ?>
         <title> Cart webpage </title>
     </head>
     <body>
-
+    
     <section id="header">
-        <?php
-            $user_id = $_SESSION['user']['id'];
-        ?>
-                <a href="#"><img src="./img/logo.png" alt="" class="logo"></a>
-                <div>
-                    <ul id="navbar">
-                        
-                        <li><a href="./home.php">Home</a></li>
-                        <li><a href="./Shop.php">Shop</a></li>
-                        <li><a href="./Blog.php">Blog</a></li>
-                        <li><a href="./About.php">About</a></li>
-                        <li><a href="./Contact.php">Contact us</a></li>
-                    <li class="lg-bag"><a href="./Cart.php" class="active"><i class="fa-solid fa-cart-shopping"></i>Cart(<?php
-                            echo count($_SESSION['cart'][$user_id]);
-                        ?>)
-                        </a></li>
-                        <a id="close"><i class="fa-solid fa-xmark"></i></a>
-                    </ul>   
-                </div>
+    <?php
+        $user_id = $_SESSION['user']['id'];
+    ?>
+            <a href="#"><img src="./img/logo.png" alt="" class="logo"></a>
+            <div>
+                <ul id="navbar">
+                    
+                    <li><a href="./home.php">Home</a></li>
+                    <li><a href="./Shop.php">Shop</a></li>
+                    <li><a href="./Blog.php">Blog</a></li>
+                    <li><a href="./About.php">About</a></li>
+                    <li><a href="./Contact.php">Contact us</a></li>
+                <li class="lg-bag"><a class="active" href="./Cart.php" ><i class="fa-solid fa-cart-shopping"></i>Cart(<?php
+                        echo count($_SESSION['cart'][$user_id]);
+                    ?>)
+                    </a></li>
+                    <a id="close"><i class="fa-solid fa-xmark"></i></a>
+                </ul>   
+            </div>
 
-                <div id="mobile">
-                    <a href="Cart.php"><i class="fa-solid fa-cart-shopping"></i>Cart (<?php echo count($_SESSION['cart'][$user_id]);?>)           
+            <div id="mobile">
+                <a href="Cart.php"><i class="fa-solid fa-cart-shopping"></i>Cart (<?php echo count($_SESSION['cart'][$user_id]);?>)           
 
-                </a>
-                    <i id="bar" class="fas fa-outdent"></i>
-                </div>
+            </a>
+                <i id="bar" class="fas fa-outdent"></i>
+            </div>
+</section>
+
+    <section id="page_header">
+            <h2>Welcome to the SHOP</h2>
+            <p>Free shiping for every 200$ buy!!</p>
     </section>
 
-    <?php 
-$user_id = $_SESSION['user']['id'];
-$cart = $_SESSION['cart'][$user_id];
-$product_id = array_keys($cart);
-$product_id = implode(',', $product_id);
+    <section id="cart" class="section-p1">
+    <table width="100%">
+        <thead>  
+            <tr>
+                <td>REMOVE</td>
+                <td>IMAGE</td>
+                <td>PRODICT</td>
+                <td>PRICE</td>
+                <td>QUANTITY</td>
+                <td>SUBTOTAL</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                require_once './php/pdo.php';
+                $categories = $pdo->query('SELECT * FROM category ORDER BY id DESC')->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($categories as $category){
+            ?>
+            <tr>
+                <td> <a href="#"><i class="far fa-times-circle"></i></a> </td>
+                <td><img src="./img/products/f1.jpeg" alt=""></td>
+                <td>name of product</td>
+                <td>price</td>
+                <td><input type="number" value="1"></td>
+                <td>final price</td>
+            </tr>
+            <tr>
+                <td> <a href="#"><i class="far fa-times-circle"></i></a> </td>
+                <td><img src="./img/products/f2.jpeg" alt=""></td>
+                <td>name of product</td>
+                <td>price</td>
+                <td><input type="number" value="1"></td>
+                <td>final price</td>
+            </tr>
+            <tr>
+                <td> <a href="#"><i class="far fa-times-circle"></i></a> </td>
+                <td><img src="./img/products/f3.jpeg" alt=""></td>
+                <td>name of product</td>
+                <td>price</td>
+                <td><input type="number" value="1"></td>
+                <td>final price</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    </section>
 
-$sqlState = $pdo->prepare('SELECT * FROM products WHERE id IN (' . $product_id . ')');
-$sqlState->execute();
-$products = $sqlState->fetchAll(PDO::FETCH_OBJ);
+    <section id="cart-add" class="section-p1">
+        <div id="coupon">
+            <h3>Apply Coupon</h3>
+            <div>
+                <input type="text" placeholder="Enter your Coupon">
+                <button class="normal">Apply</button>
+            </div>
+        </div>
 
-
-if (empty($cart)) {
-    ?>
-    <div class="alert alert-warning" role="alert">
-        YOU HAVE NO MANA
-    </div>
-    <?php
-} else {
-    ?>
-    <ul class="list-group List-group-flush w-25"></ul>
-
-    <?php
-    foreach($products as $product){
-        echo "<option value='".$category['id']."'>".$category['category']."</option>";
-
-        ?>
-    <li class="list-group-item">A</li>
-<?php
-    }
-?>
-
-    </ul>
-        <?php
-}
-?>
-
-
+        <div id="subtotal">
+            <h3>Cart total</h3>
+            <table>
+                <tr>
+                    <td>Card Subtotal</td>
+                    <td>$ 423</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free </td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>$ 423</strong></td>
+                </tr>
+            </table>
+            <button class="normal">Proceed to checkout</button>
+        </div>
+    </section>
 
     <?php include './html/footer.php' ?>
     <script src="./js/nav.js"></script>
