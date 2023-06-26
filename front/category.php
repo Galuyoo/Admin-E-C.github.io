@@ -1,5 +1,7 @@
 
 <?php
+session_start();
+
 require_once './php/pdo.php';
 $categories = $pdo->query("SELECT * FROM category")->fetchAll(PDO::FETCH_OBJ);
 
@@ -20,7 +22,7 @@ $sqlState = $pdo->prepare("SELECT * FROM products WHERE category_id=?");
 $sqlState->execute([$id]);
 
 $products=$sqlState->fetchAll(PDO::FETCH_OBJ);
-
+    
 ?>
 
 
@@ -42,27 +44,8 @@ $products=$sqlState->fetchAll(PDO::FETCH_OBJ);
     </head>
     <body>
 
+    <?php include './html/header.php' ?>
 
-    <section id="header">
-            <a href="#"><img src="./img/logo.png" alt="" class="logo"></a>
-            <div>
-                <ul id="navbar">
-                    <li><a href="./home.php">Home</a></li>
-                    <li><a class="active" href="./Shop.php">Shop</a></li>
-                    <li><a href="./Blog.php">Blog</a></li>
-                    <li><a href="./About.php">About</a></li>
-                    <li><a href="./Contact.php">Contact us</a></li>
-                    <li class="lg-bag"><a href="./Cart.php" ><i class="fa-solid fa-cart-shopping"></i></a></li>
-                    <a id="close"><i class="fa-solid fa-xmark"></i></a>
-                </ul>
-            </div>
-            
-            <div id="mobile">
-                <a href="Cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
-                <i id="bar" class="fas fa-outdent"></i>
-            </div>
-</section>
-        
     
     <section id="page_header">
             <h2>Welcome to the SHOP</h2>

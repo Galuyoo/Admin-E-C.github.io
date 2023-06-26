@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 require_once './php/pdo.php';
 
 //fect all categories
@@ -15,6 +16,7 @@ $sqlState = $pdo->prepare("SELECT * FROM products WHERE id=?");
 $sqlState->execute([$id]);
 
 $products=$sqlState->fetch(PDO::FETCH_OBJ);
+$idProduct =$products->id;
 
 $name = $products->name;
 
@@ -97,14 +99,7 @@ $category=  $category->category;
                     <option>100ml</option>
                     <option>140ml</option>
                 </select>
-                <div class="howmany" >
-                    <div class="counter d-flex">
-                        <button class="btn btn-primary mx-1 counter-add">+</button>
-                        <input class="form-control" type="number" value="1" name="qty" id="qty" max="99">
-                        <button class="btn btn-primary mx-1 counter-take">-</button>
-                    </div>
-                </div>
-                <button class="btn btn-primary ">Add To Cart</button>
+                <?php include './html/Dinput.php' ?>
     
             </div>
 

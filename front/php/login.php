@@ -15,7 +15,7 @@ session_start();
         ?>
 
     <?php else:?>
-        <em><a href="../index.php">Try to login agan</a></em>
+        <em><a href="./logout.php">Try to login agan</a></em>
     <?php endif; ?>
 </body>
 </html>
