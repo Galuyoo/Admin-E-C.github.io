@@ -10,7 +10,7 @@
             <input  class="form-control" type="number" value="<?= $qty ?>" name="qty" id="qty" max="99">
             <button onclick="return false;" class="btn btn-primary mx-1 counter-add">+</button>
         </div>
-        <button  type="submit" value="cart" name="cart" id="cart" class="cart-button">
+        <button  type="submit" value="cart" name="cart" id="cart_icon" class="cart-button">
             <a>  <i class="fa-solid fa-light fa-cart-plus" id="cart"></i></a>
         </button>
     </form>
@@ -25,3 +25,9 @@
     cursor: pointer;
   }
 </style>
+
+
+
+
+
+

@@ -123,12 +123,16 @@ body {
     transition: 0.3s ease;
 }
 
+
 #navbar li a:hover,
 #navbar li a.active{
     color:#465b52;
     
 
 }
+
+
+
 
 #navbar li a.active::after,
 #navbar li a:hover::after
@@ -147,6 +151,22 @@ body {
     display: none;
     align-items: center;
 }
+
+#mobile a:hover,
+#mobile a.active{
+    color:#465b52;
+    
+}
+
+#mobile a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color:#222;
+    transition: 0.3s ease;
+}
+
+
 #close {
     display: none;
 }
@@ -651,6 +671,16 @@ footer .copyright{
 
 /* Shop page */
 
+#cart_icon{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: #DFE4DD;
+    color: #008178;
+    border: 1px solid #cce7d0;
+}
+
 #page_header {
     background-image: url("../img/banner/idk.png");
     width: 100%;
@@ -803,7 +833,7 @@ overflow-x: auto;
 
 #cart table td:nth-child(1) {
     width: 100px;
-    text-align: center;
+
 }
 
 #cart table td:nth-child(2) {
@@ -813,20 +843,21 @@ overflow-x: auto;
 
 
 #cart table td:nth-child(3) {
-    width: 250px;
+    width: 150px;
     text-align: center;
 }
 
+
 #cart table td:nth-child(4),
 #cart table td:nth-child(5),
-#cart table td:nth-child(6) {
+#cart table td:nth-child(6),
+#cart table td:nth-child(7) {
     width: 150px;
     text-align: center;
 }
 
 #cart table td:nth-child(5) input{
     width: 70px;
-    padding: 10px 5px 10px 15px;
 }
 
 #cart table thead {
@@ -840,6 +871,7 @@ overflow-x: auto;
     text-transform: uppercase;
     font-size: 13px;
     padding: 18px 0;
+    
 }
 
 #cart table tbody tr td {

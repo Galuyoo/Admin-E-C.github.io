@@ -10,7 +10,7 @@ session_start();
 </head>
 <body>
     <h1>There has been a problem with you loging in, please retry in few minutes</h1>
-    <?php if(isset($_SESSION["user_id"])):
+    <?php if(isset($_SESSION["user"])):
         header("Location: ../home.php");
         ?>
 

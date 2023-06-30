@@ -19,7 +19,6 @@ if($qty == 0){
 }
 
 
-header("location:" .$_SERVER['HTTP_REFERER']);
-
+header("location: ../Cart.php?id=$id");
 
 ?>

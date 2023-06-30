@@ -21,32 +21,33 @@
                 <th>Modify & Delete</th>
             </tr>
         </thead>
-    <?php
-        require_once './php/pdo.php';
-        $categories = $pdo->query("SELECT products.*,category.category as 'category_cat' FROM products INNER JOIN category ON products.category_id = category.id")->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($categories as $products){
-            $price=$products['price'];
-            $discount=$products['discount'];
-
-            $pprice = $price -(($price*$discount)/100);
-            ?>
-            <tr>
-                <td><?= $products['id'] ?></td>
-                <td><?= $products['name'] ?></td>
-                <td>$<?= $price ?> </td>
-                <td><?= $discount ?> %</td>
-                <td>$<?= $pprice ?> </td>
-                <td><?= $products['category_cat'] ?></td>
-                <td><img width="60" src="./upload/product/<?=$products['img'] ?>" alt="There is no img"></td>
-                <td><?= $products['real_time'] ?></td>
-                <td>
-                    <a href="./admin/modify_product.php?id=<?php echo $products['id'] ?>" class="btn btn-primary">Modify</a>
-                    <a href="./admin/delete_product.php?id=<?php echo $products['id'] ?>" onclick="return confirm('Do you really want to delete ur data? <?php echo $products['name'] ?>');" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+        <tbody>
             <?php
-        }
-        ?>
+                require_once './php/pdo.php';
+                $categories = $pdo->query("SELECT products.*,category.category as 'category_cat' FROM products INNER JOIN category ON products.category_id = category.id")->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($categories as $products){
+                    $price=$products['price'];
+                    $discount=$products['discount'];
+
+                    $pprice = $price -(($price*$discount)/100);
+                    ?>
+                    <tr>
+                        <td><?= $products['id'] ?></td>
+                        <td><?= $products['name'] ?></td>
+                        <td>$<?= $price ?> </td>
+                        <td><?= $discount ?> %</td>
+                        <td>$<?= $pprice ?> </td>
+                        <td><?= $products['category_cat'] ?></td>
+                        <td><img width="60" src="./upload/product/<?=$products['img'] ?>" alt="There is no img"></td>
+                        <td><?= $products['real_time'] ?></td>
+                        <td>
+                            <a href="./admin/modify_product.php?id=<?php echo $products['id'] ?>" class="btn btn-primary">Modify</a>
+                            <a href="./admin/delete_product.php?id=<?php echo $products['id'] ?>" onclick="return confirm('Do you really want to delete ur data? <?php echo $products['name'] ?>');" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
         </tbody>
     </table>
 </div>

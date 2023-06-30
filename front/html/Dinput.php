@@ -12,5 +12,6 @@
             <button onclick="return false;" class="btn btn-primary mx-1 counter-add">+</button>
         </div>
        <input class="btn btn-success btn-sm" type="submit"  type="submit" name="add" value="<?= $btn?>">   
+       <?php if($qty != 0){ ?><input formaction="./php/Dlt_cart.php" class="btn btn-danger btn-sm" type="submit"  type="submit" name="dlt_p" value="Drop item">  <?php } ?>
     </form>
 </div> 
