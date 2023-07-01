@@ -56,11 +56,48 @@ $shipping = 0;
     <p>Free shipping for every $200 purchase!</p>
 </section>
 
+<?php
+if (isset($_POST['dlt'])) {
+    $_SESSION['cart'][$user_id] = [];
+    header('location: Shop.php');
+}
+
+$user_id = $_SESSION['user']['id'];
+$cart = isset($_SESSION['cart'][$user_id]) ? $_SESSION['cart'][$user_id] : array();
+
+if(!empty($cart)){
+
+    $product_id = array_keys($cart);
+    $product_id = implode(',', $product_id);
+
+    $sqlState = $pdo->prepare('SELECT * FROM products WHERE id IN (' . $product_id . ')');
+    $sqlState->execute();
+    $products = $sqlState->fetchAll(PDO::FETCH_OBJ);
+}
+
+if (isset($_POST['Cnf'])) {
+    $sql = '';
+    //$sqlStatecmd = $pdo->prepare('INSERT INTO cmd(user_id, total) VALUES(?,?)');
+    //$sqlStatecmd -> execute($cart_user,$total)
+    foreach($products as $product){
+        $product_id = $product->id;
+        $price = $product->price;
+        $qty = $cart[$product_id];
+        $discount = $product->discount;
+
+        $pprice = $price - (($price * $discount) / 100);
+
+        $total += $qty*$pprice;
+
+
+    }
+    var_dump($total);
+}
+?>
 
 <section id="cart" class="section-p1">
     <?php
-    $user_id = $_SESSION['user']['id'];
-    $cart = isset($_SESSION['cart'][$user_id]) ? $_SESSION['cart'][$user_id] : array();
+
 
     if (empty($cart) || !is_array($cart)) {
             ?>
@@ -128,20 +165,6 @@ $shipping = 0;
 </section>
 
 
-<?php
-if (isset($_POST['dlt'])) {
-    $_SESSION['cart'][$user_id] = [];
-    header('location: Shop.php');
-}
-
-if (isset($_POST['Cnf'])) {
-    $cart_user = $_SESSION['cart'][$user_id];
-    $sql = '';
-    foreach($cart_user as $productid=>$qty){
-        $sql .= "INSERT INTO commande()"; 
-    }
-}
-?>
 
 
 <section id="cart-add" class="section-p1">
