@@ -23,14 +23,13 @@
         </div>
 
         <div id="mobile">
-            <a href="Cart.php"><i class="fa-solid fa-cart-shopping"></i>Cart (as)           
-         <?php
-            if (isset($_SESSION['cart'][$user_id])) {
-                echo count($_SESSION['cart'][$user_id]);
-            } else {
-                echo "0";
-            }
-        ?>
+            <a href="Cart.php"><i class="fa-solid fa-cart-shopping"></i>Cart (<?php
+                    if (isset($_SESSION['cart'][$user_id])) {
+                        echo count($_SESSION['cart'][$user_id]);
+                    } else {
+                        echo "0";
+                    }
+                ?>)          
         </a>
             <i id="bar" class="fas fa-outdent"></i>
         </div>

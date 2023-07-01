@@ -9,24 +9,8 @@ require_once './php/pdo.php';
 include './html/header.php';
 
 ?>
-<?php
 
-
-if (isset($_SESSION["user_id"])) {
-    
-    $mysqli = require __DIR__ . "/php/conn.php";
-    
-    $sql = "SELECT * FROM user
-            WHERE id = {$_SESSION["user_id"]}";
-            
-    $result = $mysqli->query($sql);
-    
-    $user = $result->fetch_assoc();
-}
-
-?>
-
-<h1>Hello <?= $user["name"] ?></h1>
+<h1>Hello <?= $_SESSION['user']["name"] ?></h1>
 
 <h1>Welcome to the moderationg website!!</h1>
 

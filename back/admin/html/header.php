@@ -1,7 +1,7 @@
 <?php
 session_start();
 $connecte = false;
-if (isset($_SESSION["user_id"])) {
+if (isset($_SESSION["user"])) {
     $connecte = true;
 }
 else{

@@ -50,7 +50,7 @@
         <label class="form-label">description</label>
         <textarea class="form-control" name="description"><?php echo $categories['description'];?></textarea>
 
-        <label class="form-label">img</label>
+        <label class="form-label">icon (from fontawesome)</label>
         <input type="text" class="form-control" name="img" value="<?php echo $categories['img'];?>">
 
         <input type="submit" value="Modify category" class="btn btn-primary my-2" name="Modify">

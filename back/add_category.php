@@ -50,7 +50,7 @@
         <label class="form-label">description</label>
         <textarea class="form-control" name="description"></textarea>
 
-        <label class="form-label">img</label>
+        <label class="form-label">icon (from fontawesome)</label>
         <input type="text" class="form-control" name="img">
 
         <input type="submit" value="Add category" class="btn btn-primary my-2" name="add">

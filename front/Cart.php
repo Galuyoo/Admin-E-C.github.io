@@ -37,14 +37,13 @@ $shipping = 0;
     </div>
 
     <div id="mobile">
-        <a class="active"  href="Cart.php"><i class="fa-solid fa-cart-shopping"></i>Cart (as)
-            <?php
-            if (isset($_SESSION['cart'][$user_id])) {
-                echo count($_SESSION['cart'][$user_id]);
-            } else {
-                echo "0";
-            }
-            ?>
+    <a class="active" href="Cart.php"><i class="fa-solid fa-cart-shopping"></i>Cart (<?php
+                    if (isset($_SESSION['cart'][$user_id])) {
+                        echo count($_SESSION['cart'][$user_id]);
+                    } else {
+                        echo "0";
+                    }
+                ?>)          
         </a>
         <i id="bar" class="fas fa-outdent"></i>
     </div>
@@ -62,8 +61,8 @@ $shipping = 0;
         header('location: Shop.php');
     }
 
-    $user_id = $_SESSION['user']['id'];
-    $cart = isset($_SESSION['cart'][$user_id]) ? $_SESSION['cart'][$user_id] : array();
+    $user_id = $_SESSION['user']['id'] ?? 0;
+    $cart = $_SESSION['cart'][$user_id] ?? [];
 
     if(!empty($cart)){
 
@@ -76,37 +75,60 @@ $shipping = 0;
     }
 
     if (isset($_POST['Cnf'])) {
-        $sql = '';
+        $sql = 'INSERT INTO cmd_line(product_id, cmd_id, price, qty, total) VALUES';
         $total = 0;
         $cmd_line = [];
-        foreach($products as $product){
-            $product_id = $product->id;
-            $price = $product->price;
-            $qty = $cart[$product_id];
-            $discount = $product->discount;
+        if(empty($products)){
+            header('location: ./cart.php');
+        }else{
+                foreach($products as $product){
+                    $product_id = $product->id;
+                    $price = $product->price;
+                    $qty = $cart[$product_id];
+                    $discount = $product->discount;
 
-            $pprice = $price - (($price * $discount) / 100);
+                    $pprice = $price - (($price * $discount) / 100);
 
-            $total += $qty*$pprice;
-            $cmd_line[$product_id]= [
-                "product_id"=>$product_id,
-                "price"=>$price,
-                "p_total"=>$qty*$pprice,
-                "qty"=>$qty
-            ];
-        }
-        //$sqlStatecmd = $pdo->prepare('INSERT INTO cmd(user_id, total) VALUES(?,?)');
-        //$sqlStatecmd -> execute([$user_id, $total]);
+                    $total += $qty*$pprice;
+                    $cmd_line[$product_id]= [
+                        "product_id"=>$product_id,
+                        "price"=>$price,
+                        "p_total"=>$qty*$pprice,
+                        "qty"=>$qty
+                    ];
+                }
 
-        //id						real_time
+            $sqlStatecmd = $pdo->prepare('INSERT INTO cmd(user_id, total) VALUES(?,?)');
+            $sqlStatecmd -> execute([$user_id, $total]);
 
-        //$cmd_id = $pdo -> lastInsertId();
-        $cmd_id = 1;
-        foreach($cmd_line as $product){
-            $sqlStatecmd = $pdo->prepare('INSERT INTO cmd_line(product_id, cmd_id, price, qty, total) VALUES(?,?,?,?,?)');
-            $sqlStatecmd -> execute([$product['product_id'], $cmd_id,$product['price'], $product['qty'], $product['p_total']]);
-        }
-    }
+            $cmd_id = $pdo -> lastInsertId();
+
+                foreach($cmd_line as $product){
+                    $product_id = $product['product_id'];
+
+                    $sql .= "(:product_id$product_id,'$cmd_id',:price$product_id,:qty$product_id,:p_total$product_id),";
+                    //$args[] = [$product['product_id'], $cmd_id,$product['price'], $product['qty'], $product['p_total']];
+                }
+            $sql = substr($sql, 0,-1);
+            $sqlState = $pdo->prepare($sql);
+                foreach($cmd_line as $product){
+                    $product_id = $product['product_id'];
+                    $sqlState ->bindParam(':product_id'.$product_id,$product['product_id']);
+                    $sqlState ->bindParam(':price'.$product_id,$product['price']);
+                    $sqlState ->bindParam(':qty'.$product_id,$product['qty']);
+                    $sqlState ->bindParam(':p_total'.$product_id,$product['p_total']);
+                }
+            $inserted = $sqlState -> execute();
+
+            if($inserted){
+                $_SESSION['cart'][$user_id]=[];
+                ?>
+                    <div class="alert alert-primary" role="alert">Your Order with the total price of $<?= $total?> has been successfully payed!</div>
+                <?php 
+            }
+
+    }}
+
     ?>
 
 <section id="cart" class="section-p1">
