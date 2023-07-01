@@ -56,44 +56,58 @@ $shipping = 0;
     <p>Free shipping for every $200 purchase!</p>
 </section>
 
-<?php
-if (isset($_POST['dlt'])) {
-    $_SESSION['cart'][$user_id] = [];
-    header('location: Shop.php');
-}
-
-$user_id = $_SESSION['user']['id'];
-$cart = isset($_SESSION['cart'][$user_id]) ? $_SESSION['cart'][$user_id] : array();
-
-if(!empty($cart)){
-
-    $product_id = array_keys($cart);
-    $product_id = implode(',', $product_id);
-
-    $sqlState = $pdo->prepare('SELECT * FROM products WHERE id IN (' . $product_id . ')');
-    $sqlState->execute();
-    $products = $sqlState->fetchAll(PDO::FETCH_OBJ);
-}
-
-if (isset($_POST['Cnf'])) {
-    $sql = '';
-    //$sqlStatecmd = $pdo->prepare('INSERT INTO cmd(user_id, total) VALUES(?,?)');
-    //$sqlStatecmd -> execute($cart_user,$total)
-    foreach($products as $product){
-        $product_id = $product->id;
-        $price = $product->price;
-        $qty = $cart[$product_id];
-        $discount = $product->discount;
-
-        $pprice = $price - (($price * $discount) / 100);
-
-        $total += $qty*$pprice;
-
-
+    <?php
+    if (isset($_POST['dlt'])) {
+        $_SESSION['cart'][$user_id] = [];
+        header('location: Shop.php');
     }
-    var_dump($total);
-}
-?>
+
+    $user_id = $_SESSION['user']['id'];
+    $cart = isset($_SESSION['cart'][$user_id]) ? $_SESSION['cart'][$user_id] : array();
+
+    if(!empty($cart)){
+
+        $product_id = array_keys($cart);
+        $product_id = implode(',', $product_id);
+
+        $sqlState = $pdo->prepare('SELECT * FROM products WHERE id IN (' . $product_id . ')');
+        $sqlState->execute();
+        $products = $sqlState->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    if (isset($_POST['Cnf'])) {
+        $sql = '';
+        $total = 0;
+        $cmd_line = [];
+        foreach($products as $product){
+            $product_id = $product->id;
+            $price = $product->price;
+            $qty = $cart[$product_id];
+            $discount = $product->discount;
+
+            $pprice = $price - (($price * $discount) / 100);
+
+            $total += $qty*$pprice;
+            $cmd_line[$product_id]= [
+                "product_id"=>$product_id,
+                "price"=>$price,
+                "p_total"=>$qty*$pprice,
+                "qty"=>$qty
+            ];
+        }
+        //$sqlStatecmd = $pdo->prepare('INSERT INTO cmd(user_id, total) VALUES(?,?)');
+        //$sqlStatecmd -> execute([$user_id, $total]);
+
+        //id						real_time
+
+        //$cmd_id = $pdo -> lastInsertId();
+        $cmd_id = 1;
+        foreach($cmd_line as $product){
+            $sqlStatecmd = $pdo->prepare('INSERT INTO cmd_line(product_id, cmd_id, price, qty, total) VALUES(?,?,?,?,?)');
+            $sqlStatecmd -> execute([$product['product_id'], $cmd_id,$product['price'], $product['qty'], $product['p_total']]);
+        }
+    }
+    ?>
 
 <section id="cart" class="section-p1">
     <?php
